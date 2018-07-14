@@ -38,7 +38,7 @@ class GameOfLife {
   }
 
   toggleCell(row, col) { // toggle a cell value between dead and alive.
-    this.board[row][col] === 0 ? this.board[row][col] === 1 : this.board[row][col] === 0;
+    this.board[row][col] === 0 ? this.board[row][col] = 1 : this.board[row][col] = 0;
     // if(this.board[row][col] === 0) {
     //   this.board[row][col] = 1;
     // }
@@ -53,7 +53,7 @@ class GameOfLife {
 
   livingNeighbors(row, col) {
     // TODO: Return the count of living neighbors.
-    const count = 0;
+    let count = 0;
     if(this.board[row-1][col]) {
       count++;
     }
