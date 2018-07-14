@@ -53,34 +53,50 @@ class GameOfLife {
 
   livingNeighbors(row, col) {
     // TODO: Return the count of living neighbors.
-    const count = 0;
-    if(this.board[row-1][col]) {
-      count++;
-    }
-    if(this.board[row-1][col-1]) {
-      count++;
-    }
-    if(this.board[row-1][col+1]) {
-      count++;
-    }
-    if(this.board[row][col-1]) {
-      count++;
-    }
-    if(this.board[row][col+1]) {
-      count++;
-    }
-    if(this.board[row+1][col]) {
-      count++;
-    }
-    if(this.board[row+1][col-1]) {
-      count++;
-    }
-    if(this.board[row+1][col+1]) {
-      count++;
-    }
-    return count;
-  }
+    // let count = 0;
+    // if(this.board[row-1][col]) {
+    //   count++;
+    // }
+    // if(this.board[row-1][col-1]) {
+    //   count++;
+    // }
+    // if(this.board[row-1][col+1]) {
+    //   count++;
+    // }
+    // if(this.board[row][col-1]) {
+    //   count++;
+    // }
+    // if(this.board[row][col+1]) {
+    //   count++;
+    // }
+    // if(this.board[row+1][col]) {
+    //   count++;
+    // }
+    // if(this.board[row+1][col-1]) {
+    //   count++;
+    // }
+    // if(this.board[row+1][col+1]) {
+    //   count++;
+    // }
+    // return count;
 
+    let count = 0;
+
+    for (let currentRow = 0; currentRow < this.board.length; currentRow++) {
+      for (let currentCol = 0; currentCol < this.board[currentRow].length; currentCol++) {
+        let current = this.board[currentRow][currentCol];
+        if (parseInt(currentRow-row) >= 1 && parseInt(currentCol-col) >= 1) {
+          if(currentRow !== row && currentCol !== col) {
+            if(current) {
+              count++;
+            }
+          }
+        
+      }
+    }
+  }
+  return count;
+}
 
   /**
    * Given the present board, apply the rules to generate a new board
