@@ -22,6 +22,30 @@ class GameOfLife {
     return board;
   }
 
+  getCell(row, col) { // returns the cell value for the given row and col coordinates
+    if(row < 0 || row >= this.height || col < 0 || col >= this.width) {
+      return 'dead';
+    }
+    return this.board[row][col];
+
+  }
+
+  setCell(value, row, col) { //Sets a new val for cell in given row and col coordinates
+    if(row < 0 || row >= this.height || col < 0 || col >= this.width) {
+      return 'dead';
+    }
+    this.board[row][col] = value;
+  }
+
+  toggleCell(row, col) { // toggle a cell value between dead and alive.
+    this.board[row][col] === 0 ? this.board[row][col] === 1 : this.board[row][col] === 0;
+    // if(this.board[row][col] === 0) {
+    //   this.board[row][col] = 1;
+    // }
+    // else {
+    //   this.board[row][col] = 0;
+    // }
+  }
 
   /**
    * Return the amount of living neighbors around a given coordinate.
@@ -29,6 +53,32 @@ class GameOfLife {
 
   livingNeighbors(row, col) {
     // TODO: Return the count of living neighbors.
+    const count = 0;
+    if(this.board[row-1][col]) {
+      count++;
+    }
+    if(this.board[row-1][col-1]) {
+      count++;
+    }
+    if(this.board[row-1][col+1]) {
+      count++;
+    }
+    if(this.board[row][col-1]) {
+      count++;
+    }
+    if(this.board[row][col+1]) {
+      count++;
+    }
+    if(this.board[row+1][col]) {
+      count++;
+    }
+    if(this.board[row+1][col-1]) {
+      count++;
+    }
+    if(this.board[row+1][col+1]) {
+      count++;
+    }
+    return count;
   }
 
 
