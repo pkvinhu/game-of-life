@@ -10,15 +10,16 @@ class GameOfLife {
    */
 
   makeBoard() {
-    // TODO: Create and return an 2D Array 
-    // with `this.heigh` as rows and `this.width` as cols.
-    // For example, given a height of 4 and a width of 3, it will generate:
-    // [
-    //  [0, 0, 0],
-    //  [0, 0, 0],
-    //  [0, 0, 0],
-    //  [0, 0, 0],
-    // ]
+    const board = [];
+
+    while(board.length < this.height) {
+      let width = [];
+      for(let i = 0; i<this.width; i++) {
+        width.push(0)
+      }
+      board.push(width);
+    }
+    return board;
   }
 
 
@@ -34,13 +35,13 @@ class GameOfLife {
   /**
    * Given the present board, apply the rules to generate a new board
    */
-  
+
   tick() {
     const newBoard = this.makeBoard();
     // TODO: Here is where you want to loop through all the cells
     // on the existing board and determine, based on it's neighbors,
-    // whether the cell should be dead or alive in the new board 
-    // (the next iteration of the game) 
+    // whether the cell should be dead or alive in the new board
+    // (the next iteration of the game)
     //
     // You need to:
     // 1. Count alive neighbors for all cells
