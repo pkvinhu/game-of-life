@@ -52,94 +52,68 @@ class GameOfLife {
    */
 
   livingNeighbors(row, col) {
-    // TODO: Return the count of living neighbors.
-<<<<<<< HEAD
-    // let count = 0;
-    // if(this.board[row-1][col]) {
-    //   count++;
-    // }
-    // if(this.board[row-1][col-1]) {
-    //   count++;
-    // }
-    // if(this.board[row-1][col+1]) {
-    //   count++;
-    // }
-    // if(this.board[row][col-1]) {
-    //   count++;
-    // }
-    // if(this.board[row][col+1]) {
-    //   count++;
-    // }
-    // if(this.board[row+1][col]) {
-    //   count++;
-    // }
-    // if(this.board[row+1][col-1]) {
-    //   count++;
-    // }
-    // if(this.board[row+1][col+1]) {
-    //   count++;
-    // }
-    // return count;
-
     let count = 0;
 
     for (let currentRow = 0; currentRow < this.board.length; currentRow++) {
       for (let currentCol = 0; currentCol < this.board[currentRow].length; currentCol++) {
         let current = this.board[currentRow][currentCol];
-        if (parseInt(currentRow-row) >= 1 && parseInt(currentCol-col) >= 1) {
-          if(currentRow !== row && currentCol !== col) {
-            if(current) {
-              count++;
-            }
+        if (Math.abs(currentRow-row) <= 1 && Math.abs(currentCol-col) <= 1) {
+          if(!(currentRow == row && currentCol == col) && current === 1) {
+            count++;
           }
-        
+        }
       }
-=======
-    let count = 0;
-    if(this.board[row-1][col]) {
-      count++;
     }
-    if(this.board[row-1][col-1]) {
-      count++;
-    }
-    if(this.board[row-1][col+1]) {
-      count++;
-    }
-    if(this.board[row][col-1]) {
-      count++;
-    }
-    if(this.board[row][col+1]) {
-      count++;
-    }
-    if(this.board[row+1][col]) {
-      count++;
-    }
-    if(this.board[row+1][col-1]) {
-      count++;
-    }
-    if(this.board[row+1][col+1]) {
-      count++;
->>>>>>> f023f5d34814427dd35464c747738b7fbbf3c79d
-    }
+    return count;
   }
-  return count;
-}
 
   /**
    * Given the present board, apply the rules to generate a new board
    */
+  forEachCell(fn){
+    for(let i = 0; i < this.height; i++){
+      for(let j = 0; j < this.width; j++){
+        fn(i, j);
+      }
+    }
+  }
+
+  randomize() {
+    this.forEachCell((row,col) => {
+      this.board[row][col] = Math.round(Math.random());
+    })
+  }
 
   tick() {
     const newBoard = this.makeBoard();
-    // TODO: Here is where you want to loop through all the cells
-    // on the existing board and determine, based on it's neighbors,
-    // whether the cell should be dead or alive in the new board
-    // (the next iteration of the game)
-    //
-    // You need to:
-    // 1. Count alive neighbors for all cells
-    // 2. Set the next state of all cells in newBoard,
-    // based on their current alive neighbors
+
+    this.forEachCell((row, col) => {
+      const alive = this.board[row][col] === 1;
+      const dead = !alive;
+      if(dead && this.livingNeighbors(row, col) === 3){
+        newBoard[row][col] = 1;
+      }
+      if(alive && (this.livingNeighbors(row, col) === 2 || this.livingNeighbors(row, col) === 3)){
+        newBoard[row][col] = 1;
+      }
+    });
     this.board = newBoard;
   }
 }
+//     for (let currentRow = 0; currentRow < this.board.length; currentRow++) {
+//       for (let currentCol = 0; currentCol < this.board[currentRow].length; currentCol++) {
+//         let alive = game.livingNeighbors(currentRow, currentCol);
+//         let current = this.board[currentRow][currentCol];
+//         let newCurrent = newBoard[currentRow][currentCol];
+//          current === 1 && (alive === 2 || alive === 3) ? newCurrent = 0 : newCurrent = 1;
+//          current === 0 && alive === 3 ? newCurrent = 1 : newCurrent = 0;
+//       }
+//     }
+
+//     this.board = newBoard;
+//   }
+// }
+if (typeof module !== 'undefined') {
+  module.exports = GameOfLife;
+}
+

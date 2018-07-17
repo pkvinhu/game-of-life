@@ -53,6 +53,15 @@ const paint = () => {
   // HINT:
   //   https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
   //   https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName
+  tds.forEach(td => {
+    const { row, col } = td.dataset;
+    if(gol.board[row][col]) {
+      td.classList.add('alive');
+    }
+    else {
+      td.classList.remove('alive');
+    }
+  })
 }
 
 
@@ -65,20 +74,36 @@ document.getElementById("board").addEventListener("click", event => {
 });
 
 document.getElementById("step_btn").addEventListener("click", event => {
-  // TODO: Do one gol tick and paint
+  
 });
 
+let interval;
 document.getElementById("play_btn").addEventListener("click", event => {
-  // TODO: Start playing by calling `tick` and paint
-  // repeatedly every fixed time interval.
-  // HINT:
-  // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
+  if(!interval) {
+    interval = setInterval(() => {
+      gol.tick();
+      paint();
+    },100);
+  }
+  else {
+    clearInterval(interval);
+    interval = 0;
+  }
+
+});
+
+document.getElementById("pause_btn").addEventListener("click", event => {
+ if(interval) {
+  
+ }
 });
 
 document.getElementById("random_btn").addEventListener("click", event => {
-  // TODO: Randomize the board and paint
+  gol.randomize();
+  paint();
 });
 
 document.getElementById("clear_btn").addEventListener("click", event => {
-  // TODO: Clear the board and paint
+  gol.board = gol.makeBoard();
 });
+
